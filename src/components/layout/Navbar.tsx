@@ -29,7 +29,7 @@ function Navbar() {
     const isHovered = 'hover:bg-[#1967d2]/5'
 
     return (
-        <div className={`h-[3.5rem] flex flex-row px-[2rem] py-[1rem] xl:px-[2rem] xl:py-[1.5rem] items-center justify-start border-b border-b-black/10 text-[#3c4043] z-20`}>
+        <div className={`z-1600 bg-white w-full absolute top-0 left-0 h-[3.5rem] flex flex-row px-[2rem] py-[1rem] xl:px-[2rem] xl:py-[1.5rem] items-center justify-start border-b border-b-black/10 text-[#3c4043]`}>
 
             <div id='container' className='w-full justify-start flex flex-row items-center gap-[1.5rem] xl:justify-start'>
 

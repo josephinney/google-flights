@@ -1,7 +1,10 @@
+"use client"
 import React from 'react'
 import Image from 'next/image'
 import { fontSizes } from '@/styles/constant'
 import SearchFlights from '@/components/SearchFlights'
+import ExploreDestinations from '@/components/ExploreDestinations'
+import Footer from '@/components/layout/Footer'
 
 function Flights() {
 
@@ -10,9 +13,7 @@ function Flights() {
   return (
     <div className={`min-h-screen px-4 flex flex-col items-center`}>
 
-
-
-      <div id='container' className={` flex flex-col items-center h-[100px] w-full max-w-[1440px]`}>
+      <div id='container' className={`mt-[3.5rem] flex flex-col gap-5 items-center h-[100px] w-full max-w-[1440px]`}>
         
         <Image
           src="https://www.gstatic.com/travel-frontend/animation/hero/flights_nc_4.svg"
@@ -32,8 +33,12 @@ function Flights() {
           <SearchFlights />
         </div>
 
-      
+        <ExploreDestinations />
+
+        <Footer/>
       </div>
+
+      
 
     </div>
   )

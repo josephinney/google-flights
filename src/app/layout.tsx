@@ -2,8 +2,10 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
-import SideBar from "@/components/layout/SideBar";
-import { Sidebar } from "lucide-react";
+import MUIProvider from "@/providers/MUIProvider";
+import { Toaster } from 'react-hot-toast';
+import QueryProvider from "@/providers/QueryProvider";
+import Footer from "@/components/layout/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,13 +29,31 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased text-sm`}
       >
-        <Navbar/>
-        {children}
-        {/* <SideBar/> */}
-
+        <QueryProvider>
+          <MUIProvider>
+            <Navbar />
+            {children}
+            <Toaster
+              position="top-center"
+              reverseOrder={false}
+              toastOptions={{
+                className: '',
+                style: {
+                  background: '#333',
+                  color: '#fff',
+                  border: '1px solid #555',
+                },
+                success: {
+                  duration: 5000,
+                },
+              }}
+            />
+          </MUIProvider>
+        </QueryProvider>
       </body>
     </html>
   );
