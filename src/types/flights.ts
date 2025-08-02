@@ -12,6 +12,14 @@ export interface PassengerCounts {
   infantsOnLap: number;
 }
 
+export type SortByType = 'best' | 'cheapest';
+
+export interface FlightFilters {
+  maxStops: number | null;
+  maxPrice: number | null;
+  maxDuration: number | null; 
+  allowedAirlines: number[] | null; 
+}
 
 
 // ===== TYPES FOR API PAYLOADS REQUESTS =====
@@ -36,6 +44,23 @@ export interface SearchFlightsPayload {
   sortBy?: 'best' | 'price' | 'duration';
 }
 
+export interface FlightSegment {
+  id: string;
+  origin: {
+    flightPlaceId: string;
+    name: string;
+    type: string;
+  };
+  destination: {
+    flightPlaceId: string;
+    name: string;
+    type: string;
+  };
+  departure: string;
+  arrival: string;
+  durationInMinutes: number;
+  flightNumber: string;
+}
 
 // ===== TYPES FOR API RESPONSES =====
 
@@ -98,7 +123,7 @@ export interface FlightLeg {
     carriers: {
       marketing: MarketingCarrier[];
     };
-    segments: any[]; 
+    segments: FlightSegment[]; 
 }
 
 export interface FlightItinerary {
@@ -123,3 +148,5 @@ export interface SearchFlightsResponse {
     filterStats?: any; 
   };
 }
+
+

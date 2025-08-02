@@ -4,17 +4,16 @@ import Image from 'next/image'
 import { fontSizes } from '@/styles/constant'
 import SearchFlights from '@/components/SearchFlights'
 import ExploreDestinations from '@/components/ExploreDestinations'
-import Footer from '@/components/layout/Footer'
+import FlightSearchFooter from '@/components/flights/FlightSearchFooter'
+
 
 function Flights() {
-
-  //const bgUrl = `bg-[url('https://www.gstatic.com/travel-frontend/animation/hero/flights_nc_4.svg')]`
 
   return (
     <div className={`min-h-screen px-4 flex flex-col items-center`}>
 
-      <div id='container' className={`mt-[3.5rem] flex flex-col gap-5 items-center h-[100px] w-full max-w-[1440px]`}>
-        
+      <div id='container' className={` flex flex-col gap-5 items-center h-[100px] w-full max-w-[1440px]`}>
+
         <Image
           src="https://www.gstatic.com/travel-frontend/animation/hero/flights_nc_4.svg"
           alt="Image1"
@@ -32,13 +31,21 @@ function Flights() {
         <div className={`mt-5 w-full flex items-center justify-center`}>
           <SearchFlights />
         </div>
+        
+        {/* Explore destinations */}
+        <div className=' border-black/10 mt-5 w-full max-w-[1024px]'>
+          <ExploreDestinations />
+        </div>
 
-        <ExploreDestinations />
+        {/* Section Footer */}
+        <div className='border-t border-black/10 mt-5 w-full max-w-[1024px]'>
+          <FlightSearchFooter />
+        </div>
 
-        <Footer/>
+        
       </div>
 
-      
+
 
     </div>
   )

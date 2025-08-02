@@ -11,7 +11,6 @@ import { TripType, ClassType } from '@/types/flights'
 import { PassengerCounts } from '@/types/flights'
 import { useFlightManagement } from '@/hooks/useFlightManagement'
 import dayjs, { Dayjs } from 'dayjs';
-import ExploreDestinations from '@/components/ExploreDestinations';
 
 function SearchFlights() {
 

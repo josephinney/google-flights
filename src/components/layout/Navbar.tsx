@@ -16,11 +16,15 @@ import {
 
 function Navbar() {
 
-    // Hook para obtener la ruta actual
     const pathname = usePathname()
-
-    // Función para verificar si la ruta está activa
-    const isActive = (path: string) => pathname === path
+    
+    const isActive = (path: string) => {
+        
+        if (path === '/') {
+            return pathname === path;
+        }
+        return pathname === path || pathname.startsWith(path + '/');
+    }
 
     const [isSideBarOpen, setIsSideBarOpen] = useState(false)
 
@@ -29,7 +33,7 @@ function Navbar() {
     const isHovered = 'hover:bg-[#1967d2]/5'
 
     return (
-        <div className={`z-1600 bg-white w-full absolute top-0 left-0 h-[3.5rem] flex flex-row px-[2rem] py-[1rem] xl:px-[2rem] xl:py-[1.5rem] items-center justify-start border-b border-b-black/10 text-[#3c4043]`}>
+        <div className={`z-1600 sticky bg-white w-full absolute top-0 left-0 h-[3.5rem] flex flex-row px-[2rem] py-[1rem] xl:px-[2rem] xl:py-[1.5rem] items-center justify-start border-b border-b-black/10 text-[#3c4043]`}>
 
             <div id='container' className='w-full justify-start flex flex-row items-center gap-[1.5rem] xl:justify-start'>
 
@@ -37,7 +41,7 @@ function Navbar() {
 
                 {/* Logo */}
                 <div className='flex items-center '>
-                    <Link href={'/'}>
+                    <Link href={'/flights'}>
                         <picture className=''>
                             {/* Desktop */}
                             <source

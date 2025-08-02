@@ -5,8 +5,11 @@ import {
     FlightItinerary,
     PassengerCounts,
     TripType,
-    ClassType
+    ClassType,
+    FlightFilters,
+    SortByType
 } from '@/types/flights';
+
 
 // Interface for the state managed by the store
 interface FlightState {
@@ -19,6 +22,7 @@ interface FlightState {
     passengers: PassengerCounts;
     classType: ClassType;
 
+
     // --- State for Airport Autocomplete ---
     airportSuggestions: AirportSuggestion[];
     isSearchingAirports: boolean;
@@ -27,6 +31,9 @@ interface FlightState {
     itineraries: FlightItinerary[];
     isSearchingFlights: boolean;
     searchError: string | null;
+    filters: FlightFilters;
+    sortBy: SortByType;
+    selectedItinerary: FlightItinerary | null;
 
     // --- Actions to modify the state ---
     setTripType: (type: TripType) => void;
@@ -44,7 +51,10 @@ interface FlightState {
     setItineraries: (results: FlightItinerary[]) => void;
     setIsSearchingFlights: (loading: boolean) => void;
     setSearchError: (error: string | null) => void;
-
+    setSortBy: (sortBy: SortByType) => void;
+    setFilters: (newFilters: Partial<FlightFilters>) => void;
+    setSelectedItinerary: (itinerary: FlightItinerary | null) => void;
+    resetFilters: () => void;
     resetSearch: () => void;
 }
 
@@ -67,6 +77,14 @@ const initialState = {
     itineraries: [],
     isSearchingFlights: false,
     searchError: null,
+    filters: {
+        maxStops: null,
+        maxPrice: null,
+        maxDuration: null,
+        allowedAirlines: null,
+    },
+    selectedItinerary: null,
+    sortBy: 'best' as SortByType,
 };
 
 export const useFlightStore = create<FlightState>()(
@@ -147,25 +165,49 @@ export const useFlightStore = create<FlightState>()(
             ),
 
             setIsSearchingFlights: (loading) => set(
-                { 
-                    isSearchingFlights: loading, 
-                    searchError: null 
-                }, 
-                false, 
+                {
+                    isSearchingFlights: loading,
+                    searchError: null
+                },
+                false,
                 'setIsSearchingFlights'
             ),
 
             setSearchError: (error) => set(
-                { 
-                    searchError: error, 
-                    isSearchingFlights: false, 
-                    itineraries: [] 
-                }, 
-                false, 
+                {
+                    searchError: error,
+                    isSearchingFlights: false,
+                    itineraries: []
+                },
+                false,
                 'setSearchError'
             ),
 
-            // --- Reset Action ---
+            setSortBy: (sortBy) => set(
+                { sortBy },
+                false,
+                'setSortBy'
+            ),
+
+            setFilters: (newFilters) => set((state) => ({
+                filters: { ...state.filters, ...newFilters }
+            }), false, 'setFilters'),
+
+            resetFilters: () => set({
+                filters: {
+                    maxStops: null,
+                    maxPrice: null,
+                    maxDuration: null,
+                    allowedAirlines: null,
+                },
+            }, false, 'resetFilters'),
+
+            setSelectedItinerary: (itinerary) => set(
+                { selectedItinerary: itinerary }, 
+                false, 
+                'setSelectedItinerary'
+            ),
+
             resetSearch: () => set(initialState, false, 'resetSearch'),
         }),
         {

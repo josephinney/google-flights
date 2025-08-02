@@ -4,7 +4,7 @@ import {
     SearchAirportResponse,
     SearchFlightsPayload,
     SearchFlightsResponse,
-    AirportSuggestion 
+    AirportSuggestion, 
 } from '@/types/flights';
 
 /**
@@ -50,6 +50,7 @@ class FlightService {
 
         return response.data;
     }
+
 }
 
 

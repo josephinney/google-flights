@@ -10,18 +10,27 @@ import {
     Language,
     EditLocationOutlined,
     Timeline,
-    AttachMoney
+    AttachMoney,
+    SettingsOutlined,
+    HelpOutlineOutlined,
+    FeedbackOutlined
 } from '@mui/icons-material';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 function SideBar() {
 
-    // Hook para obtener la ruta actual
+
     const pathname = usePathname()
 
-    // Función para verificar si la ruta está activa
-    const isActive = (path: string) => pathname === path
+
+    const isActive = (path: string) => {
+        
+        if (path === '/') {
+            return pathname === path;
+        }
+        return pathname === path || pathname.startsWith(path + '/');
+    }
 
     const [isModalLanguageOpened, setisModalLanguageOpened] = useState(false);
     const [isModalCurrencyOpened, setisModalCurrencyOpened] = useState(false);
@@ -118,6 +127,38 @@ function SideBar() {
                     <EditLocationOutlined className='mr-7' /> <p>Change location</p>
                 </div>
             </div>
+
+            {/* Line  */}
+            <div className='w-full border-t border-t-black/30'></div>
+
+            {/* Flight Settings */}
+            <div className={` px-[2rem]  w-full h-10 flex items-center `}
+
+            >
+                <div className='flex w-full flex-row items-center justify-start'>
+                    <SettingsOutlined className='mr-7' /> <p>Flight Settings</p>
+                </div>
+            </div>
+
+            {/* Feedback */}
+            <div className={` px-[2rem]  w-full h-10 flex items-center `}
+
+            >
+                <div className='flex w-full flex-row items-center justify-start'>
+                    <FeedbackOutlined className='mr-7' /> <p>Feedback</p>
+                </div>
+            </div>
+
+            {/* Help */}
+            <div className={` px-[2rem]  w-full h-10 flex items-center `}
+
+            >
+                <div className='flex w-full flex-row items-center justify-start'>
+                    <HelpOutlineOutlined className='mr-7' /> <p>Help</p>
+                </div>
+            </div>
+
+
 
             {/* Modals */}
             {isModalLanguageOpened && (<div>Modals</div>)}

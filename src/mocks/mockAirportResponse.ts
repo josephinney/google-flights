@@ -59,6 +59,8 @@ export const mockAirportApiResponse: SearchAirportResponse = {
         }
       }
     },
+
+    
     // --- London ---
     {
       presentation: {

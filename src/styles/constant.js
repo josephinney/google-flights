@@ -1,7 +1,5 @@
-// styles/constants.js
-
 export const textColors = {
-    // GYB Greens
+    // Gray
     textGray: 'text-[#3c4043]',
 };
 
